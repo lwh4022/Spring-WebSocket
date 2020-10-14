@@ -24,8 +24,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
   
-    	// 웹소켓 엔드포인트 명시
-    	// withSockJS()는 웹소켓을 사용할 수 없는 브라우저나 장애가 있을 때 fallback 옵션을 사용할 수 있음
+    		// 웹소켓 엔드포인트 명시
+    		// withSockJS()는 웹소켓을 사용할 수 없는 브라우저나 장애가 있을 때 fallback 옵션을 사용할 수 있음
 		registry.addEndpoint("/ws").withSockJS();
 	}
 }
