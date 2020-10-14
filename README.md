@@ -34,32 +34,32 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 ###3. WebSocketEventListener 구현 (@Component 사용)
 ```java
   @Autowired
-	private SimpMessageSendingOperations messagingTemplate;
+  private SimpMessageSendingOperations messagingTemplate;
 
   // 연결 성공시
-	@EventListener
-	public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-		logger.info("Received a new web socket connection");
-	}
+  @EventListener
+  public void handleWebSocketConnectListener(SessionConnectedEvent event) {
+ 	logger.info("Received a new web socket connection");
+  }
 	
   // 연결 실패시
-	@EventListener
-	public void handleWebSocketDisconnectListner(SessionDisconnectEvent event) {
-		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-		logger.info(new String(event.getMessage().getHeaders().toString()));
+  @EventListener
+  public void handleWebSocketDisconnectListner(SessionDisconnectEvent event) {
+  	StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+	logger.info(new String(event.getMessage().getHeaders().toString()));
 		
-		String username = (String) headerAccessor.getSessionAttributes().get("username");
-		if(username != null) {
-			logger.info("User Disconnected : " + username);
-			
-			ChatMessage chatMessage = new ChatMessage();
-			chatMessage.setType(MessageType.LEAVE);
-			chatMessage.setSender(username);
-	    
-      //메시지 전송 하기
-			messagingTemplate.convertAndSend("/topic/public", chatMessage);
+	String username = (String) headerAccessor.getSessionAttributes().get("username");
+	if(username != null) {
+		logger.info("User Disconnected : " + username);
+		
+		ChatMessage chatMessage = new ChatMessage();
+		chatMessage.setType(MessageType.LEAVE);
+		chatMessage.setSender(username);
+    
+     //메시지 전송 하기
+		messagingTemplate.convertAndSend("/topic/public", chatMessage);
 		}
-	}
+  }
 ```
 
 ###4. Controller 구현
