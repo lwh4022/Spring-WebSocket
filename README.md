@@ -2,12 +2,12 @@
 
 ## 서버
 
-###1. build.gradle에 Dependency 추가
+### 1. build.gradle에 Dependency 추가
 ```
 implementation 'org.springframework.boot:spring-boot-starter-websocket'
 ```
 
-###2. MessageBroker 활성화
+### 2. MessageBroker 활성화
 ```java
 @Configuration
 @EnableWebSocketMessageBroker
@@ -31,7 +31,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 }
 ```
 
-###3. WebSocketEventListener 구현 (@Component 사용)
+### 3. WebSocketEventListener 구현 (@Component 사용)
 ```java
   @Autowired
   private SimpMessageSendingOperations messagingTemplate;
@@ -62,7 +62,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
   }
 ```
 
-###4. Controller 구현
+### 4. Controller 구현
 ```java
   //Message-handling Method 엔드포인트
   @MessageMapping("/chat.sendMessage")
