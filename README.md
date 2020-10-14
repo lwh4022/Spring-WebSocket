@@ -90,7 +90,7 @@ function connect(event) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
         
-        // 소켓 연결
+        // 소켓 연결 : (서버에 지정한 websocket endpoint, 수정 )
         var socket = new SockJS('/ws');
         
         // STOMP에 소켓 연결
