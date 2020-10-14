@@ -66,18 +66,18 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 ```java
   //Message-handling Method 엔드포인트
   @MessageMapping("/chat.sendMessage")
-	// Queue 이름
+  // Queue 이름
   @SendTo("/topic/public")
-	public ChatMessage greeting(@Payload ChatMessage chatMessage) throws Exception {
-		return chatMessage;
-	}
+  public ChatMessage greeting(@Payload ChatMessage chatMessage) throws Exception {
+	return chatMessage;
+  }
 	
-	@MessageMapping("/chat.addUser")
-	@SendTo("/topic/public")
-	public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-		headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-		return chatMessage;
-	}
+  @MessageMapping("/chat.addUser")
+  @SendTo("/topic/public")
+  public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+	headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+	return chatMessage;
+  }
 ```
 
 ### 클라이언트
