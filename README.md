@@ -15,17 +15,17 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-    // topic으로 시작되는 메시지가 메시지 브로커로 라우팅되도록 설정
+    		// topic으로 시작되는 메시지가 메시지 브로커로 라우팅되도록 설정
 		registry.enableSimpleBroker("/topic");
-    //  /app으로 시작되는 메시지가 메시지 핸들 메소드로 연결
+    		//  app으로 시작되는 메시지가 메시지 핸들 메소드로 연결
 		registry.setApplicationDestinationPrefixes("/app");
 	}
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
   
-    // 웹소켓 엔드포인트 명시
-    // withSockJS()는 웹소켓을 사용할 수 없는 브라우저나 장애가 있을 때 fallback 옵션을 사용할 수 있음
+    	// 웹소켓 엔드포인트 명시
+    	// withSockJS()는 웹소켓을 사용할 수 없는 브라우저나 장애가 있을 때 fallback 옵션을 사용할 수 있음
 		registry.addEndpoint("/ws").withSockJS();
 	}
 }
@@ -56,9 +56,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 		chatMessage.setType(MessageType.LEAVE);
 		chatMessage.setSender(username);
     
-     //메시지 전송 하기
+     		//메시지 전송 하기
 		messagingTemplate.convertAndSend("/topic/public", chatMessage);
-		}
+	}
   }
 ```
 
